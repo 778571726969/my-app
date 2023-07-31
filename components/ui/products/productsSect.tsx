@@ -1,4 +1,27 @@
-const Products = () => {
+import Image from "next/image";
+import { client } from "../../../sanity/lib/client";
+
+import { Image as IImage } from "sanity";
+import { urlForImage } from "../../../sanity/lib/image";
+export const ProductData = async () => {
+  const response = await client.fetch(
+    `*[_type=="product"]{title,description,price,category ->{name},image}`
+  );
+  return response;
+};
+
+interface Product {
+  title: string;
+  description: string;
+  price: number;
+  image: IImage;
+  category: {
+    name: string;
+  };
+}
+const Products = async () => {
+  const data: Product[] = await ProductData();
+  const dataDisplay = data.slice(0, 3);
   return (
     <main className=" sm:pt-20 xl:pt-40">
       <div>
@@ -13,34 +36,29 @@ const Products = () => {
         </div>
 
         {/* products details  */}
-        <div className="xl:grid xl:grid-cols-3  sm:grid sm:justify-items-center ">
-          <div className="sm:hidden xl:grid xl:h-full xl:w-full hover:transition-[1.5] hover:scale-110 ease-linear duration-300">
-            <img
-              src="/images/product1.png"
-              alt=""
-              className="h-11/12 w-11/12  rounded-xl"
-            />
-            <p className="font-semibold text-lg mt-2 text-slate-800 tracking-wider px-2">
-              Brushed Raglan Sweatshirt
-            </p>
-            <p className="font-semibold text-lg mt-2 text-slate-800 tracking-wider px-2">
-              $195
-            </p>
-          </div>
-          <div className="sm:hidden xl:grid xl:h-full xl:w-full hover:transition-[1.5] hover:scale-110 ease-linear duration-300">
-            <img
-              src="/images/product2.png"
-              alt=""
-              className="h-11/12 w-11/12  rounded-xl"
-            />
-            <p className="font-semibold text-lg mt-2 text-slate-800 tracking-wider px-2">
-              Cameryn Sash Tie Dress
-            </p>
-            <p className="font-semibold text-lg mt-2 text-slate-800 tracking-wider px-2">
-              $545
-            </p>
-          </div>
-          <div className="  xl:h-11/12 xl:w-11/12 sm:w-auto sm:h-auto sm:text-center xl:text-start xl:px-0  xl:hover:transition-[1.5] xl:hover:scale-110 xl:ease-linear duration-300">
+
+        <div className="xl:grid xl:grid-cols-3  sm:hidden  ">
+          {dataDisplay.map((item) => (
+            <div className=" grid h-full w-full hover:transition-[1.5] hover:scale-110 ease-linear duration-300">
+              <div>
+                <img
+                  src={urlForImage(item.image).url()}
+                  alt="Description of the image"
+                  className="h-11/12 w-11/12  rounded-xl"
+                />
+                <div className="font-semibold text-lg mt-2 text-slate-800 tracking-wider px-2">
+                  <p>{item.title}</p>
+
+                  <p className="font-semibold text-lg mt-2 text-slate-800 tracking-wider px-2">
+                    ${item.price}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className=" xl:hidden sm:grid  sm:w-auto h-auto text-center  px-0   justify-items-center ">
+          <div className=" hover:transition-[1.5]  hover:scale-110 ease-linear duration-300">
             <img src="/images/product3.png" alt="" className="  rounded-xl" />
             <p className="font-semibold text-lg mdd:mt-2 sm:mt-1 text-slate-800 mdd:tracking-wider sm:tracking-normal px-2 ">
               Flex Sweatshirt

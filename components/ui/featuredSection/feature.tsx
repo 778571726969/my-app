@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+
 const Feature = () => {
   return (
     <main>
@@ -73,7 +74,7 @@ const Feature = () => {
                   undyed and 100% traceable.
                 </p>
                 <div className="items-center justify-center">
-                  <button className="flex justify-center gap-2 text-white text-sm w-full mdd:font-bold sm:font-semibold bg-slate-700 py-3 rounded-xl hover:bg-slate-300 hover:text-black hover:shadow-lg hover:shadow-slate-700">
+                  <button className="flex justify-center gap-2 text-white text-sm w-full mdd:font-bold sm:font-semibold bg-slate-700 py-3 rounded-xl   hover:shadow-md hover:scale-105 duration-100 hover:shadow-black ">
                     <Link href="/allProducts">See All Products</Link>
                   </button>
                 </div>

@@ -21,11 +21,11 @@ const Hero = () => {
             </p>
             <Link
               href="/allProducts"
-              className="xl:p-4 sm:p-2 text-base bg-gray-700 xl:w-1/4 
-              sm:w-full sm:grid sm:justify-items-center sm:items-center rounded-xl hover:shadow-md hover:shadow-gray-700
-              sm:mt-2 xl:mt-7"
+              className="xl:p-4 sm:p-2 text-base bg-gray-700 xl:w-2/4 
+              sm:w-2/4 sm:grid sm:justify-items-center sm:items-center rounded-xl hover:shadow-md hover:shadow-gray-700
+              sm:mt-2 xl:mt-7 hover:scale-105 duration-100"
             >
-              <button className="flex font-sans font-semibold  leading-5 items-center  gap-2 text-white ">
+              <button className="flex font-sans font-semibold  leading-5 items-center  gap-2 text-white  ">
                 <ShoppingCart />
                 Start Shopping
               </button>
